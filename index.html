@@ -565,6 +565,14 @@
       font-family: "Segoe UI", Tahoma, sans-serif;
     }
 
+    .footer .shell {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 10px 18px;
+    }
+
     .modal {
       position: fixed;
       inset: 0;
@@ -783,7 +791,7 @@
         <div> <img src="images\Borsalogo12.jpg"  class="logo"></div>
         <div class="brand-copy">
           <strong>BORSA CHIC</strong>
-          <span>From Borsa chic to the most elegant girls</span>
+          <span>From Borsa chic to the most elegant girl</span>
         </div>
       </div>
 
@@ -794,6 +802,7 @@
       </nav>
 
       <div class="nav-actions">
+        <a class="pill pill-outline" href="https://wa.me/201044735360" target="_blank" rel="noopener noreferrer">WhatsApp Us</a>
         <a class="pill pill-outline" href="#collection">Shop Purses</a>
         <button class="pill pill-solid" onclick="openForm('Luna Signature Tote', 950)">Order Best Seller</button>
       </div>
@@ -987,7 +996,10 @@
   </main>
 
   <footer class="footer">
-    <div class="shell">BORSA CHIC | Boutique purse shopping experience made to convert better.</div>
+    <div class="shell">
+      <span>BORSA CHIC | Boutique purse shopping experience made to convert better.</span>
+      <a href="https://wa.me/201044735360" target="_blank" rel="noopener noreferrer">WhatsApp: 01044735360</a>
+    </div>
   </footer>
 
   <div class="modal" id="orderModal" aria-hidden="true">
@@ -1044,6 +1056,9 @@
     const selectedItemNumber = document.getElementById("selectedItemNumber");
     const selectedPrice = document.getElementById("selectedPrice");
     const successMessage = document.getElementById("successMessage");
+    const customerNameInput = document.getElementById("customerName");
+    const customerPhoneInput = document.getElementById("customerPhone");
+    const customerAddressInput = document.getElementById("customerAddress");
 
     const productCatalog = {
       "Luna Signature Tote": {
@@ -1114,9 +1129,9 @@
 
       const payload = {
         itemNumber: currentProduct.itemNumber,
-        name: document.getElementById("customerName").value.trim(),
-        phone: document.getElementById("customerPhone").value.trim(),
-        address: document.getElementById("customerAddress").value.trim(),
+        name: customerNameInput.value.trim(),
+        phone: customerPhoneInput.value.trim(),
+        address: customerAddressInput.value.trim(),
         product: currentProduct.name
       };
 
@@ -1127,10 +1142,10 @@
 
       try {
         const formData = new URLSearchParams();
-        formData.append("itemNumber", currentProduct.itemNumber);
-        formData.append("name", document.getElementById("customerName").value);
-        formData.append("phone", document.getElementById("customerPhone").value);
-        formData.append("address", document.getElementById("customerAddress").value);
+        formData.append("itemNumber", payload.itemNumber);
+        formData.append("name", payload.name);
+        formData.append("phone", payload.phone);
+        formData.append("address", payload.address);
 
         await fetch(GOOGLE_SCRIPT_URL, {
           method: "POST",
@@ -1148,6 +1163,7 @@
         checkoutForm.reset();
         updateSelectedProduct();
         closeForm();
+        window.scrollTo({ top: 0, behavior: "smooth" });
       } catch (error) {
         await Swal.fire({
           icon: "error",
