@@ -1324,7 +1324,7 @@
   </div>
 
   <script>
-    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxTMYgQ9UUGYtSlpyN_gRaNACxkmcMR5yETUZ8S_8E3d-2ixcBddL0jT_icWnD0qIaT/exec";
+    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycby_UPLLbHWGm9Vs3cfWjcarQ9AR73AKF_1fpZwegCVoDJTkTp0MQvJ-CxuwDkTUUCBb/exec";
     const orderModal = document.getElementById("orderModal");
     const checkoutForm = document.getElementById("checkoutForm");
     const cartCount = document.getElementById("cartCount");
@@ -1508,6 +1508,16 @@
       }
 
       try {
+        Swal.fire({
+          title: "Sending order...",
+          text: "Please wait",
+          allowOutsideClick: false,
+          allowEscapeKey: false,
+          didOpen: () => {
+            Swal.showLoading();
+          }
+        });
+
         for (const item of cart) {
           const formData = new URLSearchParams();
           formData.append("itemNumber", item.itemNumber);
