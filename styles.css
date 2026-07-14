@@ -21,6 +21,7 @@
 
     html {
       scroll-behavior: smooth;
+      overflow-x: hidden;
     }
 
     body {
@@ -34,6 +35,7 @@
         radial-gradient(circle at bottom right, rgba(194, 165, 255, 0.2), transparent 24%),
         linear-gradient(180deg, #fffdfd 0%, var(--bg) 100%);
       padding-top: 92px;
+      overflow-x: hidden;
     }
 
     img {
@@ -50,6 +52,11 @@
     input,
     textarea {
       font: inherit;
+    }
+
+    button,
+    a {
+      -webkit-tap-highlight-color: transparent;
     }
 
     .shell {
@@ -753,6 +760,13 @@
       gap: 10px 18px;
     }
 
+    .footer .shell::after {
+      content: "Made by Marwan Hazem";
+      flex-basis: 100%;
+      color: var(--accent-dark);
+      font-weight: 700;
+    }
+
     .modal {
       position: fixed;
       inset: 0;
@@ -1036,48 +1050,54 @@
 
     @media (max-width: 760px) {
       body {
-        padding-top: 84px;
+        padding-top: 68px;
+        background:
+          radial-gradient(circle at top left, rgba(255, 155, 190, 0.18), transparent 24%),
+          linear-gradient(180deg, #fffdfd 0%, var(--bg) 100%);
       }
 
       .modal {
-        align-items: flex-start;
-        padding: 12px;
+        align-items: flex-end;
+        padding: 0;
       }
 
       .modal-box {
         width: 100%;
-        max-height: calc(100vh - 24px);
-        padding: 22px 18px;
-        border-radius: 20px;
+        max-height: calc(100vh - 10px);
+        padding: 20px 16px;
+        border-radius: 22px 22px 0 0;
       }
 
       .product-modal-box {
-        padding: 18px 14px;
+        padding: 18px 12px;
       }
 
       .detail-gallery img {
-        flex-basis: 84vw;
-        width: 84vw;
+        width: 100%;
+        flex-basis: auto;
+        border-radius: 16px;
       }
 
       .detail-content {
         grid-template-columns: 1fr;
+        gap: 10px;
       }
 
       .detail-price {
         width: fit-content;
-        font-size: 24px;
+        font-size: 22px;
+        padding: 10px 14px;
       }
 
       .nav {
         flex-wrap: nowrap;
-        gap: 10px;
-        min-height: 72px;
-        padding: 10px 0;
+        gap: 8px;
+        min-height: 60px;
+        padding: 8px 0;
       }
 
       .shell {
-        width: min(100% - 20px, 1180px);
+        width: min(100% - 28px, 1180px);
       }
 
       .section-head,
@@ -1107,58 +1127,256 @@
       }
 
       .brand-copy strong {
-        font-size: 15px;
+        font-size: 14px;
       }
 
       .nav-actions {
-        gap: 8px;
+        gap: 6px;
+        margin-left: auto;
       }
 
       .nav-actions .pill {
-        padding: 10px 12px;
+        min-height: 42px;
+        padding: 9px 10px;
         font-size: 12px;
+        white-space: nowrap;
       }
 
       .nav-actions a[href="#collection"] {
         display: none;
       }
 
+      .cart-pill {
+        gap: 6px;
+        max-width: 54px;
+        overflow: hidden;
+        color: transparent;
+        justify-content: center;
+      }
+
       .cart-count {
         min-width: 24px;
         height: 24px;
         font-size: 12px;
+        color: var(--accent-dark);
       }
 
       .hero {
         min-height: auto;
-        padding: 40px 0 28px;
+        padding: 24px 0 22px;
+      }
+
+      .hero-copy {
+        padding: 26px 16px;
+        border-radius: 18px;
+        box-shadow: 0 16px 34px rgba(142, 108, 170, 0.12);
       }
 
       .hero-copy h1 {
-        max-width: 12ch;
-        font-size: clamp(34px, 10vw, 56px);
+        max-width: 100%;
+        font-size: clamp(32px, 10vw, 48px);
+        line-height: 1;
       }
 
       .hero-copy p {
-        font-size: 16px;
+        margin-top: 14px;
+        font-size: 15px;
+        line-height: 1.55;
       }
 
       .hero-logo {
-        width: min(270px, 76vw);
+        width: min(210px, 68vw);
+        margin-bottom: 16px;
+        border-radius: 18px;
+      }
+
+      .eyebrow {
+        margin-bottom: 10px;
+        font-size: 11px;
+        letter-spacing: 0.12em;
+      }
+
+      .hero-actions {
+        width: 100%;
+        display: grid;
+        gap: 10px;
+        margin-top: 20px;
+      }
+
+      .hero-actions .cta,
+      .hero-actions .pill {
+        width: 100%;
+        min-height: 46px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+      }
+
+      .hero-highlights {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr;
+        overflow-x: visible;
+        scroll-snap-type: none;
+        margin-top: 22px;
+        gap: 10px;
       }
 
       .highlight,
       .feature,
       .trust-item {
-        flex-basis: 84vw;
+        width: 100%;
+        flex-basis: auto;
+        border-radius: 16px;
+        padding: 16px;
       }
 
       .product-card {
-        flex-basis: 84vw;
+        width: 100%;
+        flex-basis: auto;
+        border-radius: 18px;
+      }
+
+      .product-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+        overflow-x: visible;
+        scroll-snap-type: none;
+      }
+
+      .feature-grid,
+      .trust-grid,
+      .story,
+      .detail-gallery {
+        display: grid;
+        grid-template-columns: 1fr;
+        overflow-x: visible;
+        scroll-snap-type: none;
+      }
+
+      .feature-grid,
+      .trust-grid,
+      .story {
+        gap: 14px;
+        margin-left: -2px;
+        padding: 0 2px 10px;
+        scroll-padding-left: 2px;
+      }
+
+      .product-grid {
+        margin-left: 0;
+        padding: 0 0 10px;
+      }
+
+      .product-image-wrap {
+        padding: 8px;
+      }
+
+      .product-image-wrap img {
+        aspect-ratio: 1 / 1;
+        border-radius: 12px;
+      }
+
+      .tag {
+        top: 14px;
+        left: 14px;
+        padding: 6px 8px;
+        font-size: 9px;
+      }
+
+      .product-info {
+        padding: 0 10px 12px;
+      }
+
+      .product-info h3 {
+        font-size: 18px;
+        line-height: 1.1;
+      }
+
+      .product-meta {
+        min-height: 0;
+        margin-bottom: 10px;
+        font-size: 12px;
+        line-height: 1.4;
+      }
+
+      .price-row {
+        display: grid;
+        gap: 2px;
+        margin-bottom: 10px;
+      }
+
+      .price {
+        font-size: 19px;
+      }
+
+      .price-row span {
+        font-size: 11px;
+      }
+
+      .product-points {
+        display: none;
+      }
+
+      .product-colors {
+        gap: 7px;
+        margin-bottom: 10px;
+        font-size: 11px;
+      }
+
+      .color-swatch {
+        width: 24px;
+        height: 24px;
+      }
+
+      .order-btn,
+      .cta,
+      .submit-btn,
+      .close-btn {
+        min-height: 46px;
+        padding: 13px 18px;
+      }
+
+      .product-card .order-btn {
+        min-height: 40px;
+        padding: 10px 12px;
+        font-size: 13px;
       }
 
       .story-card {
-        flex-basis: 90vw;
+        width: 100%;
+        flex-basis: auto;
+        min-height: 330px;
+        border-radius: 18px;
+      }
+
+      .story-card.copy {
+        padding: 24px 18px;
+      }
+
+      .story-card h3 {
+        font-size: 28px;
+      }
+
+      section {
+        padding: 26px 0;
+      }
+
+      .section-head {
+        gap: 10px;
+        margin-bottom: 16px;
+      }
+
+      .section-head h2 {
+        font-size: 28px;
+        line-height: 1.08;
+      }
+
+      .section-head p {
+        font-size: 14px;
+        line-height: 1.55;
       }
 
       .cart-panel {
@@ -1180,10 +1398,61 @@
         width: 100%;
         text-align: center;
       }
+
+      .footer {
+        padding: 22px 0 42px;
+        font-size: 13px;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .nav-actions .pill-outline {
+        width: 42px;
+        overflow: hidden;
+        color: transparent;
+        position: relative;
+      }
+
+      .nav-actions .pill-outline::after {
+        content: "WA";
+        color: var(--text);
+        position: absolute;
+        inset: 0;
+        display: grid;
+        place-items: center;
+        font-weight: 700;
+      }
+
+      .brand {
+        gap: 8px;
+      }
+
+      .brand-copy strong {
+        font-size: 13px;
+      }
+
+      .product-grid {
+        gap: 10px;
+      }
+
+      .product-info h3 {
+        font-size: 16px;
+      }
+
+      .product-meta {
+        display: none;
+      }
     }
     .logo{
       width: 64px;
       height: auto;
       border-radius: 18px;
       flex-shrink: 0;
+    }
+
+    @media (max-width: 420px) {
+      .logo {
+        width: 50px;
+        border-radius: 14px;
+      }
     }
